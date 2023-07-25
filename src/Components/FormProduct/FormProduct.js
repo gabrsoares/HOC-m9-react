@@ -1,11 +1,37 @@
 import React, { useState } from 'react'
 
-function FormProduct({ setIsEmpty }) {
+function FormProduct({ setIsProdEmpty, setIsCpfValid}) {
  
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [cpf, setCpf] = useState('')
+    const [cpf, setCPF] = useState('')
     const [product, setProduct] = useState('')
+
+     //fonte do código abaixo: https://www.devmedia.com.br/validar-cpf-com-javascript/23916
+     //função feita para checar se o CPF é valido ou não
+     const testCPF = (strCPF) => {
+        let Soma;
+        let Resto;
+        let i;
+      
+        Soma = 0;
+        if (strCPF === "00000000000") return false;
+      
+        for (i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+        Resto = (Soma * 10) % 11;
+      
+        if (Resto === 10 || Resto === 11) Resto = 0;
+        if (Resto !== parseInt(strCPF.substring(9, 10))) return false;
+      
+        Soma = 0;
+        for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+        Resto = (Soma * 10) % 11;
+      
+        if (Resto === 10 || Resto === 11) Resto = 0;
+        if (Resto !== parseInt(strCPF.substring(10, 11))) return false;
+      
+        return true;
+    };
 
     const handleChange = (event) => {
         const {id, value} = event.target
@@ -18,10 +44,11 @@ function FormProduct({ setIsEmpty }) {
                 setEmail(value)
                 break
             case 'cpf':
-                setCpf(value)
+                setCPF(value)
+                setIsCpfValid(false)
                 break
             case 'product':
-                setProduct(value)
+                setProduct(value.toString())
                 break
             default:
                 console.log("Campo não encontrado!")
@@ -32,17 +59,25 @@ function FormProduct({ setIsEmpty }) {
     const resetForm = () => {
         setName('')
         setEmail('')
-        setCpf('')
+        setCPF('')
         setProduct('')
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (name.length === 0 || email.length === 0 || cpf.length === 0 || product.length === 0){
-            setIsEmpty(true)
+            setIsProdEmpty(true)
+            setIsCpfValid(false)
         } else {
-            setIsEmpty(false)
-            resetForm()
+            setIsProdEmpty(false)
+            if (cpf.length >= 11) { //a função do teste cpf só pode ser acessada se o cpf tiver 11 caracteres, se não o programa da erro
+                if (testCPF(cpf)) {
+                    setIsCpfValid(true)
+                    resetForm()
+                } else {
+                    setIsCpfValid(false)
+                }
+            }
         }
     }
 
@@ -59,7 +94,7 @@ function FormProduct({ setIsEmpty }) {
                 </div>
                 <div className="cpf">
                     <label htmlFor="cpf">CPF:</label>
-                    <input onChange={handleChange} value={cpf} type="text" id='cpf'/>
+                    <input maxLength={11} onChange={handleChange} value={cpf} type="text" id='cpf'/>
                 </div>
                 <label htmlFor="product">Produto:</label>
                 <select id='product' value={product} onChange={handleChange}>

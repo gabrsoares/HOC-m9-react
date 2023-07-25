@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function FormAccount({setIsEmpty, setIsEqual}) {
+function FormAccount({setIsAccEmpty, setIsEqual}) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -39,9 +39,9 @@ function FormAccount({setIsEmpty, setIsEqual}) {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (name.length === 0 || email.length === 0 || password.length === 0 || rpassword.length === 0){
-            setIsEmpty(true)
+            setIsAccEmpty(true)
         } else {
-            setIsEmpty(false)
+            setIsAccEmpty(false)
             if(password !== rpassword){
                 setIsEqual(false)
             } else {
