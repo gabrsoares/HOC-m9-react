@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './FormAccount.css'
 
 function FormAccount({setIsAccEmpty, setIsEqual}) {
 
@@ -53,20 +54,20 @@ function FormAccount({setIsAccEmpty, setIsEqual}) {
 
     return (
         <form>
-            <div id='form'>
-                <div className="name">
+            <div className='form account'>
+                <div className="field name">
                     <label htmlFor="account-name">Nome:</label>
                     <input onChange={handleChange} value={name} type="text" id='account-name'/>
                 </div>
-                <div className="email">
+                <div className="field email">
                     <label htmlFor="account-email">Email:</label>
                     <input onChange={handleChange} value={email} type="text" id='account-email'/>
                 </div>
-                <div className="password">
+                <div className="field password">
                     <label htmlFor="password">Senha:</label>
                     <input onChange={handleChange} value={password} type="password" id='password'/>
                 </div>
-                <div className="rpassword">
+                <div className="field rpassword">
                     <label htmlFor="rpassword">Confirmar senha:</label>
                     <input onChange={handleChange} value={rpassword} type="password" id='rpassword'/>
                 </div>

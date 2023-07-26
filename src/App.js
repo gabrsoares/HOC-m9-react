@@ -14,17 +14,26 @@ function App() {
 
   return (
     <div className="App">
-      <FormAccount setIsAccEmpty={setIsAccEmpty} setIsEqual={setIsEqual}/>
-      <AccountValidation 
-        isAccEmpty={isAccEmpty}
-        isEqual={isEqual}
-      />
-      <FormProduct setIsProdEmpty={setIsProdEmpty} validateCPF={validateCPF} setValidateCPF={setValidateCPF} setIsCpfValid={setIsCpfValid}/>
-      <ProductValidation
-        isProdEmpty={isProdEmpty}
-        validateCPF={validateCPF}
-        isCpfValid={isCpfValid}
-      />
+      <h1>Formulários</h1>
+      <div id='content'>
+        <div id='form-account'>
+          <FormAccount setIsAccEmpty={setIsAccEmpty} setIsEqual={setIsEqual}/>
+          <AccountValidation 
+            isAccEmpty={isAccEmpty}
+            isEqual={isEqual}
+          />
+        </div>
+        <div id='form-product'>
+          <FormProduct setIsProdEmpty={setIsProdEmpty} validateCPF={validateCPF} setValidateCPF={setValidateCPF} setIsCpfValid={setIsCpfValid}/>
+          <ProductValidation
+            isProdEmpty={isProdEmpty}
+            validateCPF={validateCPF}
+            isCpfValid={isCpfValid}
+          />
+        </div>
+      </div>
+      
+      
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './FormProduct.css'
 
 function FormProduct({ setIsProdEmpty, setIsCpfValid}) {
  
@@ -83,27 +84,30 @@ function FormProduct({ setIsProdEmpty, setIsCpfValid}) {
 
     return (
         <form>
-            <div id='form'>
-                <div className="name">
+            <div className='form product'>
+                <div className="field name">
                     <label htmlFor="name">Nome:</label>
                     <input onChange={handleChange} value={name} type="text" id='name'/>
                 </div>
-                <div className="email">
+                <div className="field email">
                     <label htmlFor="email">Email:</label>
                     <input onChange={handleChange} value={email} type="text" id='email'/>
                 </div>
-                <div className="cpf">
+                <div className="field cpf">
                     <label htmlFor="cpf">CPF:</label>
                     <input maxLength={11} onChange={handleChange} value={cpf} type="text" id='cpf'/>
                 </div>
-                <label htmlFor="product">Produto:</label>
-                <select id='product' value={product} onChange={handleChange}>
-                    <option value=""></option>
-                    <option value="Computador">Computador</option>
-                    <option value="Celular">Celular</option>
-                    <option value="Tablet">Tablet</option>
-                    <option value="Notebook">Notebook</option>
-                </select>
+                <div className='field product'>
+                    <label htmlFor="product">Produto:</label>
+                    <select id='product' value={product} onChange={handleChange}>
+                        <option value=""></option>
+                        <option value="Computador">Computador</option>
+                        <option value="Celular">Celular</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Notebook">Notebook</option>
+                    </select>
+                </div>
+                
                 <button onClick={handleSubmit}>Enviar</button>
             </div>
         </form>
